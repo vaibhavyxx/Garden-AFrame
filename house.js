@@ -1,21 +1,28 @@
-AFRAME.registerGeometry('house', {
+/*AFRAME.registerComponent('play-video', {
   schema: {
-
+    video: {type: 'string'},
+    autoplay: {type: 'bool', default: true},
   },
-
-  init: function () {
-
-    /*const scene = document.querySelector('a-scene')
-    const house = document.createElement('#house')
-    house.classList.add('house');
-    scene.appendChild('house');
-
-    for(let i=0; i < 10; i++){
-      let tinyHouse = document.createElement('#house');
-      tinyHouse.setAttribute('position', {x: i+10, y: i+10, z:0})
-      house.appendChild(tinyHouse)
+  init() {
+    const v = document.querySelector(this.data.video)
+    const {el} = this
+    let playing = false
+    if (this.data.autoplay === true) {
+      v.autoplay = true
+      v.muted = true
+      v.play()
+    } else {
+      // Add tap event listiner to play/pause
+      el.addEventListener('click', () => {
+        if (!playing) {
+          v.play()
+          playing = true
+        } else {
+          v.pause()
+          playing = false
+        }
+      })
     }
+  },
+})
 */
-    
-  }
-});

@@ -1,101 +1,333 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Textures - A-Frame School</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
-     <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
-    
-  </head>
-  <body>
-    <a-scene>
+<head>
+  <title>Suburbs</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
+  <script src="house.js"></script>
 
-      <!-- importing assets -->
-      <a-assets>
-        <a-asset-item id = "fence" src = "fence.glb"></a-asset-item>
-        <a-asset-item id= "castle" src ="castle.glb"></a-asset-item>
-          <video id = "vid" autoplay loop= "true" src = "images/ride.mp4">
-      </a-assets>
+</head>
+<body>
+  <a-scene stats>
 
-      <a-video src = "#vid" width = "10" height = "10" position = "12.227 7.375 34.510" scale = "2.936 1 1"></a-video>
+    <!-- importing assets -->
+    <a-assets>
 
-      <a-entity id="decor" gltf-model="#fence" scale ="15 15 15" rotation= "0 0 0" ></a-entity>
-      <a-entity id ="castle decor" gltf-model = "#castle"></a-entity>
+      <a-asset-item id = 'playground' src = 'swings.glb'></a-asset-item>
+      <a-asset-item id = 'tree-3d' src = 'big_tree.glb'></a-asset-item>
+      <a-asset-item id = "fence" src = "fence.glb"></a-asset-item>
+      <a-asset-item id= "castle" src ="castle.glb"></a-asset-item>
+      <a-asset-item id = "flower" src = 'another-flower.glb'></a-asset-item>
+      <a-asset-item id = 'ufo' src = 'ufo-3d/Rigged_UFO_gltf/Rigged_Modular UFO 2.8.glb'></a-asset-item>
+      <a-asset-item id = 'orange-car' src = 'orange-car.glb'></a-asset-item>
+      <a-asset-item id = 'truck' src = 'truck.glb'></a-asset-item>
+      <a-asset-item id = 'bee' src = 'honeybee.glb'></a-asset-item>
 
-      <a-entity id= "left"></a-entity>
-      <a-light
-        type="directional"
-        light="castShadow: true"
-        position="1000 800 300"
-        intensity="0.5"
-      ></a-light>
-      <a-sky
-        src="https://cdn.glitch.global/6bae2660-c71c-470b-9ac7-42cd977d167c/vecteezy_seamless-360-degrees-angle-view-blue-sky-with-clouds-with_12633880_231.jpg?v=1688628578469"
-      ></a-sky>
+      <!--car for animation-->
+      <a-asset-item id = "car-o" src = "car-low-poly/Chevrolet_Camaro_SS_Low.obj"></a-asset-item>
+      <a-asset-item id = "car-m" src = "car-low-poly/Chevrolet_Camaro_SS_Low.mtl"></a-asset-item>
 
-      <a-plane id = "ground"
-        position="0 -0.160 0"
-        color="green"
-        roughness = "1"
-        src="https://cdn.glitch.me/6bae2660-c71c-470b-9ac7-42cd977d167c/vecteezy_green-grass-for-texture-or-background_1955075.jpg?v=1688628686600"
-        width="500"
-        height="500"
-        side="double"
-        rotation="90 0 0"
-      ></a-plane>
+      <!--buildings -->
+      <a-asset-item id = "building-o" src = "building/building_04.obj"></a-asset-item>
+      <a-asset-item id = "building-m" src= "building/building_04.mtl"></a-asset-item>
 
-      <a-plane id= "road"
-      position = "17.078 0.061 22.811"
-      color = "gray"
-      metalness = "0.7"
-      roughness = "0.5"
-      width = "2"
-      height= "5"
-      side= "double"
-      scale = "5.331 12.106 1"
-      rotation= "90 90 0"></a-plane>
+      <video id = "video" autoplay loop= "true" src = "images/tiny-ride.mp4"></video>
+      <video id="backup-vid" autoplay loop = 'true' src= "images/tiny-sample.mp4"></video>
 
-      <!-- house -->
-      <a-entity id = 'house'>
-      <a-box position = "-10 2.779 10" color = "yellow" width = "10" height= "10" depth="10"></a-box>
+      <!-- playground tex -->
+      <img id= 'playground-tex' src="playground-tex.png">
 
-       <a-plane id  = "door"
-          color="brown"
-          width="2"
-          height="5"
-          position="-0.044 1.362 2.728"
-          side="double"
-          scale = "0.722 0.573 1.00"
-        ></a-plane>
-      </a-entity>
+      <!-- roof tex-->
+      <img id= "roof-NRM" src = "roof_tiles/RoofTilesTerracotta004_NRM_2K.png">
+      <img id = "roof-flat" src = "roof_tiles/RoofTilesTerracotta004_flat.jpg">
+      <img id= "roof-disp" src = "roof_tiles/RoofTilesTerracotta004_DISP_2K.jpg">
 
-      <!--adding animations on the streets -->
-      <a-box  id ="car" position="-1 0.5 -3" rotation="0 0 0" color="#4CC3D9" animation = "property: position; from: 0.132 0.662 23.447; to: 184.780 0.662 23.447; dur: 50000; dir: alternate; easing:linear; loop: true"></a-box>
-      <a-box  id ="car2" position="-1 0.5 -3" rotation="0 0 0" color="red" animation = "property: position; from: 0.132 0.862 23.447; to: 184.780 0.862 23.447; dur: 1500; dir: alternate; easing:linear; loop: true"></a-box>
+      <!--grass tex-->
+      <img id = "grass-NRM" src = "grass_tiles/Grass_005_Normal.jpg">
+      <img id= "grass-flat" src="grass_tiles/Grass_005_BaseColor.jpg">
+      <img id= "grass-ambient" src="grass_tiles/Grass_005_AmbientOcclusion.jpg">
 
-      <a-sphere id= "car3" position="-1 0.5 -3" rotation="0 0 0" color="blue" animation = "property: position; from: 0.22 1.062 23.447; to: 164.780 1.062 23.447; dur: 2500; dir: alternate; easing:linear; loop: true";
-      animation__color = "property: material.color; from: #EF2D5E; to: #4CC3D9; dur: 2500; autoplay: true; dir: alternate; loop: true"></a-sphere>
+      <!--road tex-->
+      <img id= "road-NRM" src = "road/Road_001_normal.jpg">
+      <img id = "road-flat" src = "road/Road_001_basecolor.jpg">
+      <img id= "road-ambient" src = "road/Road_001_ambientOcclusion.jpg">
 
-      <a-entity id = "tree">
-        <a-cylinder color = "brown" height = "4" radius = ".5" position = "5.294 2.040 -9.649"></a-cylinder>
-        <a-icosahedron color = "green" radius = "2.5" 
-                       position= "5.304 11.576 -9.658"></a-icosahedron>
-        <a-icosahedron color = "green" radius = "4" 
-                       position= "5.304 6.910 -9.658 "
-                       rotation = "45 0 0"></a-icosahedron>
-      </a-entity>
+      <!--cottage tex-->
+      <img id= "cottage-flat" src="cottage-obj/cottage_diffuse.png">
+      <img id= "cottage-NRM" src="cottage-obj/cottage_normal.png">
+
+    </a-assets>
+
+    <a-entity id = 'playground-3d' gltf-model = '#playground' position = '-11.584 0 0' scale = '1.418 1.418 1.418'></a-entity>
+    <a-entity id = 'big-low-poly-tree3d' gltf-model = '#tree-3d' position = '-27.182 0 -4.798'></a-entity>
+    <a-entity id = "fence-3d" gltf-model = "#fence" scale = '1 1 5' position = '-5.406 0 6.039'></a-entity>
+    <a-entity id = 'flower-3d' gltf-model = '#flower' scale = '0.05 0.05 0.05' position = '-1.465 0 5.026'></a-entity>
+
+ <!-- flaw in code   <a-plane id = 'axis' color = 'red' position = '0 30 15'
+  animation__rotate = 'primitive: rotation; from: 0 0 0; to: 0 0 360; fill: forwards; dur: 8000; repeat: indefinite; dir: alternate'></a-plane>-->
+
+  <!-- Rotates ufo on an axis-->
+  <a-entity 
+  rotation = '0 0 0' position = '0 21.968 12.372'
+  animation__rotate='property: rotation; 
+  dur: 10000; 
+  from: 0 0 0;    
+  to: 0 360 0; 
+  dir: normal;    
+  easing: linear; 
+  loop: true;'>
+
+  <a-entity id= 'ufo-3d' gltf-model = '#ufo'
+  position = '5 0 0' rotation = '-90 90 0'>
+</a-entity>
+</a-entity>
+
+<a-entity id = 'bee-3d' 
+gltf-model = '#bee'
+scale = '0.757 0.757 0.757'
+position = '-1.413 2.942 7.934'
+animation-mixer = 'clip:beeflyIdle'></a-entity>
+
+<a-entity id="videoBolt"
+ visible="true"
+material="src: #video"
+geometry="primitive: a-box; width = 80; height = 45" position= "4.038 5.816 49.048" scale = "16.295 11.036 0.713"> 
+<a-text id= 'header' value = "Movie Screening" color = 'black' position= '-0.489 0.614 0' scale = '0.621 0.621 0.621'></a-text>
+<a-plane id = 'bg' color = 'white' position = '0 0.098 -0.419' scale = '1.068 1.246 1' side = 'double'></a-plane>
+<a-plane src = '#video'></a-plane>
+</a-entity>
+
+<a-entity id = "tree1">
+  <a-cylinder color = "brown" height = "4" radius = ".5" position = "5.294 2.040 -9.649"></a-cylinder>
+  <a-icosahedron color = "green" radius = "2.5" 
+  position= "5.304 11.576 -9.658"></a-icosahedron>
+  <a-icosahedron color = "green" radius = "4" 
+  position= "5.304 6.910 -9.658 "
+  rotation = "45 0 0"></a-icosahedron>
+</a-entity>
+</a-entity>
+
+<a-entity id = "building"
+obj-model = "obj: #building-o; mtl: #building-m"
+position = "191.643 1.756 85.397"
+scale = "3.746 3.746 3.746"></a-entity>
+
+<!--car for the movies-->
+<a-entity id = "car-model"
+obj-model = "obj: #car-o; mtl: #car-m"
+position = '41.562 1.046 41.425'
+scale = '0.971 0.971 0.971'></a-entity>
+
+<!--car animation DOESN'T FLIP PROPERLY ADD rotation to entity-->
+<a-entity id = "car-anim"
+obj-model = "obj: #car-o; mtl: #car-m"
+position = '41.562 1.012 25.778'
+scale = '0.971 0.971 0.971'
+rotation = '0 90 0'
+animation__move = "property: position; from: 0.132 1.002 25.778; to: 184.780 1.002 25.778; dur: 50000; dir: alternate; easing:linear; loop: true";
+animation__rotate = 'property: rotation; from: 0 90 0; to: 0 270 0; dur:50; easing: linear; startEvents: animationcomplete__move'></a-entity>
+
+<a-entity id= "left"></a-entity>
+<a-light
+type="directional"
+light="castShadow: true"
+position="1000 800 300"
+intensity="1"
+></a-light>
+
+<a-sky
+src="https://cdn.glitch.global/6bae2660-c71c-470b-9ac7-42cd977d167c/vecteezy_seamless-360-degrees-angle-view-blue-sky-with-clouds-with_12633880_231.jpg?v=1688628578469"
+></a-sky>
+
+<a-plane id = "ground"
+position="87.901 -0.160 62.429"
+color = 'green'
+scale = '0.613 -0.306 -50.523'
+roughness = "1"
+src="#grass-flat"
+repeat = "1 1"
+normal-map= "#grass-NRM"
+normal-texture-repeat = "1 1"
+normal-scale = "1 1"
+ambient-occulusion-map = "#grass-ambient"
+ambient-occulusion-map-intensity = "0.5"
+ambient-occulusion-texture-repeat = "1 1"
+width="500"
+height="500"
+side="double"
+rotation="90 0 0"
+></a-plane>
+
+<a-plane id= "main-road"
+position = "89.540 0.061 22.811"
+color = "gray"
+src="#road-flat"
+repeat = "3 3"
+normal-map= "#road-NRM"
+normal-texture-repeat = "3 3"
+normal-scale = "3 3"
+ambient-occulusion-map = "#road-ambient"
+ambient-occulusion-map-intensity = "0.5"
+ambient-occulusion-texture-repeat = "1 1"
+metalness = "0.7"
+roughness = "0.5"
+width = "2"
+height= "5"
+side= "double"
+scale = "11.248 62.141 1"
+rotation= "90 90 0"></a-plane>
+
+
+<a-plane id  = "door"
+color="brown"
+width="2"
+height="5"
+position="-0.044 1.362 2.728"
+side="double"
+scale = "0.722 0.573 1.00"
+></a-plane>
+</a-entity>
+
+<!--adding animations on the streets -->
+<a-entity id = "car-1" 
+gltf-model = "#truck" 
+position="-1 0.5 -3" 
+rotation="0 -90.000 0" 
+scale = '2.905 2.905 2.905'
+animation = "property: position; begin: click;from: 184.780 0.662 23.447; to: 0.132 0.662 23.447; dur: 5000; dir: alternate; easing:linear; loop: true"></a-entity>
+
+<a-entity  id ="car2" 
+gltf-model = '#orange-car'
+position="-1 0.5 -3" 
+rotation="0 90 0" 
+scale = '1.774 1.774 1.774'
+animation = "property: position; from: 0.132 0.798 13.822; to: 184.780 0.798 13.822; dur: 15000; dir: alternate; easing:linear; loop: true"></a-entity>
+
+<a-icosahedron 
+color = "green" 
+radius = "4" 
+position= "-15.738 -0.138 -11.950 "
+scale = "0.669 0.599 0.661"
+rotation = "45 0 0"></a-icosahedron>
+
+<a-box id="anim_box" position="3.167 0.526 1.012" scale="1 1 1" color = 'pink'
+animation__start="property: scale; to: 2 2 2; loop: true; dur: 1000; dir: alternate"
+animation__end="property: scale; to: 1 1 1; dur: 1000; loop: true; startEvents: animationcomplete__start">
+</a-box>
+
+<!--adding interractions -->
+<a-box id = 'spin'
+width = '2'
+height = '1'
+depth = '1'
+rotation = '45 45 0'
+color = 'pink'
+position = '-8.101 1.303 -5.382'
+event-set__enter = 'event: mouseenter; color: yellow'
+event-set__leave = 'event: mouseleave; color: blue'
+animation__revolve = 'primitive: rotation; begin: click; repeat: indefinite; from: 45 45 0; to: 45 45 360'></a-box>
+
+<a-entity id = 'sun'>
+  <a-light type = "directional" position = "7.767 46.463 83.729" color = "#FFFFFF" intensity= "1" radius = '5'></a-light>
+</a-entity>
+
+<a-camera >
+  <a-cursor color = '#faa8a2'/>
+</a-camera>
+
+</a-scene>
+
+<script>
+  const scene = document.querySelector('a-scene');
+  let boxA = document.querySelector('#spin').addEventListener('click', function(evt){
+    console.log('the box has sunk into the ground.')
+
+    /*Attempt at making interractions
+    var rotationA = evt.getAttribute('rotation');
+    console.log('box is supposed to spin');
+    boxA.setAttribute('animation__revolve', 'to', {x: 45, y: 45, z: 360});
+    boxA.setAttribute('animation__revolve', 'from', {x:45, y:45, z:0});*/
+  });
+
+
+  let fences = document.querySelector('#fence-3d');
+  let flowers = document.querySelector('#flower-3d');
+  let tree = document.querySelector('#big-low-poly-tree3d')
+
+  //creates trees movie theatre row
+  for(let i=0; i <5; i++){
+    let treeClone2 = tree.cloneNode(true);
+    treeClone2.setAttribute('position', {x: 27.668 - 20 * i, y: -0.160, z:39.351});
+    scene.appendChild(treeClone2);
+  }
+
+  //near the playground row
+  for(let i=0; i <2; i++){
+    let treeClone = tree.cloneNode(true);
+    treeClone.setAttribute('position', {x: -30.999 - 20 * i, y: 0, z: -4.798});
+    scene.appendChild(treeClone);
+  }
+
+  for(let i=0; i <21; i++){
+
+    let fenceClone = fences.cloneNode(true);
+    let flowerClone = flowers.cloneNode(true);
+        fenceClone.setAttribute('position', {x: 5.406 + 10 * i, y: 0, z: 6.039});                                  
+        flowerClone.setAttribute('position', {X: 1.465 * 10* i,y: 0,z: 5.026});
+        scene.appendChild(fenceClone);
+        scene.appendChild(flowerClone);
+      }
+
+      //To create .qrows of cars for the movie theater
+      //Tip this can be done using 2d array instead
+      let car1 = document.querySelector('#car-model');
+
+      for(let i=0; i <5; i++){                         
+        let clone1 = car1.cloneNode(true);
+        clone1.setAttribute('position', {x: -8.652 + 8* i, y: 0.905, z: 68.235});       
+        clone1.setAttribute('rotation', '0 180 0');
+        scene.appendChild(clone1);
+      }
+
+      //To create another set of builings
+      var building = document.querySelector('#building');
+
+      //middle row 
+      for(let i = 0; i <3; i++){
+        let clone = building.cloneNode(true);
+        clone.setAttribute('position', {x: 65.217 + 40*i,
+          y: 1.756,
+          z: 85.397})
+        scene.appendChild(clone);
+      }
+
+      //back row
+      for(let i = 0; i <4; i++){
+        let clone = building.cloneNode(true);
+        clone.setAttribute('position', {x: 65.217 + 40*i,
+          y: 1.756,
+          z: 118.032})
+        scene.appendChild(clone);
+      }
+
+      //front row
+      for(let i = 0; i <4; i++){
+        let clone = building.cloneNode(true);
+        clone.setAttribute('position', {x: 65.217 + 40*i,
+          y: 1.756,
+          z: 53.782})
+        scene.appendChild(clone);
+      }
       
-       <a-icosahedron color = "green" radius = "4" 
-                       position= "-15.738 -0.138 -11.950 "
-                      scale = "0.669 0.599 0.661"
-                       rotation = "45 0 0"></a-icosahedron>
-      
-
-      <a-light type="point" intensity="0.8" position="2 4 4"></a-light>
-    </a-scene>
-    
-    <script>
-      const scene = document.querySelector('a-scene');
+      //To create tiny lanes
+      var lanes = document.querySelector('#main-road');
+      let lane1 = lanes.cloneNode(true);
+      lane1.setAttribute('position', {x: 89.5, y: 0.061, z: 22.81});
+      lane1.setAttribute('rotation', '90 0 0');
+      lane1.setAttribute('scale', {x: 5.904, y: 0.061, z: 0.859});
+      scene.appendChild(lane1);
 
       for(let i=0; i < 20; i++){
 
@@ -105,12 +337,17 @@
         wall.setAttribute('height', '10');
         wall.setAttribute('width', '5');
         wall.setAttribute('depth', '5');
-        wall.setAttribute('position', {x: i * 10, y: 0, z: 0})
-        scene.appendChild(wall)
+        wall.setAttribute('position', {x: i * 10, y: 4.836, z: 0})
+        scene.appendChild(wall);
 
-        let roof = document.createElement('a-box')
-        roof.setAttribute('material', {src: 'images/3529.jpg'});
-        roof.setAttribute('position', {x: i * 10, y: 5.43, z: 0});
+        let roof = document.createElement('a-box');
+        roof.setAttribute('material', {src: "#roof-flat"});
+        roof.setAttribute('material', 'normal-map', '#roof-NRM');
+        roof.setAttribute('material', 'displacement-map', '#roof-disp');
+        roof.setAttribute('material', 'normal-texture-repeat', '1 1');
+        roof.setAttribute('material', 'displacement-scale', '2 2');
+        roof.setAttribute('material', 'displacement-texture-repeat', '1 1')
+        roof.setAttribute('position', {x: i * 10, y: 10.314, z: 0});
         roof.setAttribute('height', '1');
         roof.setAttribute('depth', '5');
         roof.setAttribute('width', '5');
@@ -123,15 +360,41 @@
         door.setAttribute('rotation', '0 0 90');
         scene.appendChild(door);
 
-//window issues w alignment
         let window = document.createElement('a-plane');
         window.setAttribute('material', {src: 'images/window.jpg'});
         window.setAttribute('rotation', '0 90 0');
-        window.setAttribute('position', {x: -2.572 + 10 *i, y: 2, z: 0.051});
+        window.setAttribute('position', {x: -2.572 + 10 *i, y: 8.054, z: 0.051});
         window.setAttribute('side', 'double');
         window.setAttribute('width', '4');
         window.setAttribute('height', '3');
         scene.appendChild(window);
+
+        let window2 = document.createElement('a-plane');
+        window2.setAttribute('material', {src: 'images/window.jpg'});
+        window2.setAttribute('rotation', '0 90 0');
+        window2.setAttribute('position', {x: 2.585 + 10 *i, y: 4.096, z:0.051});
+        window2.setAttribute('side', 'double');
+        window2.setAttribute('width', '4');
+        window2.setAttribute('height', '3');
+        scene.appendChild(window2);
+
+        let window3 = document.createElement('a-plane');
+        window3.setAttribute('material', {src: 'images/window.jpg'});
+        window3.setAttribute('rotation', '0 90 0');
+        window3.setAttribute('position', {x: 2.585 + 10 *i, y:  8.054, z: 0.051});
+        window3.setAttribute('side', 'double');
+        window3.setAttribute('width', '4');
+        window3.setAttribute('height', '3');
+        scene.appendChild(window3);
+
+        let window4 = document.createElement('a-plane');
+        window4.setAttribute('material', {src: 'images/window.jpg'});
+        window4.setAttribute('rotation', '0 90 0');
+        window4.setAttribute('position', {x: -2.572 + 10 *i, y:  4.096, z: 0.051});
+        window4.setAttribute('side', 'double');
+        window4.setAttribute('width', '4');
+        window4.setAttribute('height', '3');
+        scene.appendChild(window4);
 
         //tree
         let trunk = document.createElement('a-cylinder');
@@ -149,19 +412,9 @@
         leaf.setAttribute('color', 'green');
         leaf.setAttribute('material', {roughness: 5})
         scene.appendChild(leaf);
-
-        //issue this is not letting the bigger one print
-        /*let upperLeaf = document.createElement('a-icosahedron');
-        leaf.setAttribute('position', {x: 15.700 + 10 *i, y: 11.576, z: -9.658});
-        leaf.setAttribute('rotation', '0 45 0');
-        leaf.setAttribute('radius', '2.5');
-        leaf.setAttribute('color', '#1cd42e');
-        scene.appendChild(upperLeaf);
-*/
-
       }
 
-    
+
     </script>
   </body>
-</html>
+  </html>
